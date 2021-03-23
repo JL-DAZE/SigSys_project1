@@ -1,6 +1,6 @@
 function msg = decode(sig_received,fs,varargin)
     if (nargin<3)
-        pulse = ones(1, int(fs*0.15)); 
+        pulse = ones(1, int(fs*0.3)); 
     else
         pulse = varargin{1};
     end
@@ -21,6 +21,8 @@ function msg = decode(sig_received,fs,varargin)
            result(i) = 1;        
        end
     end
+    
+    display(result)
     
     AsciiFile = fopen("ascii.code");
     Ascii = textscan(AsciiFile, "%s %b");
