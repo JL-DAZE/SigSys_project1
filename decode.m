@@ -5,14 +5,14 @@ function msg = decode(sig_received,fs,varargin)
         pulse = varargin{1};
     end
     
-    figure(1);
+    figure();
     hold on;
     plot(sig_received,'-r');
     plot(pulse,'-b');
     
     T = length(pulse);
     Filtered = conv(sig_received, fliplr(pulse));
-    figure(2)
+    figure();
     plot(Filtered, '-r');
     N = floor(length(sig_received) / length(pulse));
     result = zeros(1, N);
