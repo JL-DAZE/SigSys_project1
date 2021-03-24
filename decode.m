@@ -17,7 +17,6 @@ function msg = decode(sig_received,fs,varargin)
     N = floor(length(sig_received) / length(pulse));
     result = zeros(1, N);
     for i = 1:N
-       display(Filtered(i * T))
        if Filtered(i * T) > 0
            result(i) = 1;        
        end
@@ -32,7 +31,6 @@ function msg = decode(sig_received,fs,varargin)
         for j = 1:8
             num = num + result(i*8 + j) * 2^(8-j);
         end
-        display(num)
         index = Ascii{1,2} == num;
         char = Ascii{1,1}{index};
         if char == ":"
