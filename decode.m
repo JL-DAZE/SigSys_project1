@@ -5,15 +5,27 @@ function msg = decode(sig_received,fs,varargin)
         pulse = varargin{1};
     end
     
-    figure();
+    timeStep = 1 / fs;
+    figure;
     hold on;
-    plot(sig_received,'-r');
-    plot(pulse,'-b');
+    x = timeStep:timeStep:length(sig_received)*timeStep;
+    plot(x, sig_received,'-r');
+    x = timeStep:timeStep:length(pulse)*timeStep;
+    plot(x, pulse,'-b');
+    title('Received signal and filter');
+    xlabel('Time (s)');
+    ylabel('Signal');
+    legend({'Received signal', 'Filter'});
+    hold off;
     
     T = length(pulse);
     Filtered = conv(sig_received, fliplr(pulse));
-    figure();
-    plot(Filtered, '-r');
+    figure;
+    x = timeStep:timeStep:length(Filtered)*timeStep;
+    plot(x, Filtered, '-r');
+    title('Filterd signal')
+    xlabel('Time (s)');
+    ylabel('Signal');
     N = floor(length(sig_received) / length(pulse));
     result = zeros(1, N);
     for i = 1:N
