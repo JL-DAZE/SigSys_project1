@@ -11,7 +11,7 @@ function transmit_noise(msg, pulse, sampleRate, noiseLevel)
     plot(x, encodedSignal, '-b');
     plot(x, noise, '-r');
     title('Original signal and noise');
-    xlabel('Time');
+    xlabel('Time (s)');
     ylabel('Signal');
     legend({'Original signal', 'Noise'});
     hold off;
@@ -20,7 +20,7 @@ function transmit_noise(msg, pulse, sampleRate, noiseLevel)
     hold on;
     plot(x, noisifiedSignal, '-r');
     title('Noisified signal');
-    xlabel('Time');
+    xlabel('Time (s)');
     ylabel('Signal');
     legend({'Noisified signal'});
     hold off;
