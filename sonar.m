@@ -1,20 +1,37 @@
+sampleRate = 100;
+timeStep = 1 / sampleRate;
 load('ActiveSonar.mat');
-figure(1);
+
+figure;
 hold on;
-plot(SonarPing,'-r');
-plot(SonarEcho,'-b');
+xPing = sampleRate:sampleRate:sampleRate*length(SonarPing);
+xEcho = sampleRate:sampleRate:sampleRate*length(SonarEcho);
+plot(xPing, SonarPing,'-r');
+plot(xEcho, SonarEcho,'-b');
+title('Ping signal and echo signal');
+xlabel('Time (s)');
+ylabel('Signal');
+legend('Ping signal', 'Echo signal');
+hold off;
 
 echoLength = length(SonarEcho);
 T = length(SonarPing);
 
-Filtered = conv(SonarEcho, fliplr(SonarPing));
-figure(2);
-plot(Filtered, '-r');
+filtered = conv(SonarEcho, fliplr(SonarPing));
+figure;
+hold on;
+xFiltered = sampleRate:sampleRate:sampleRate*length(filtered);
+plot(xFiltered, filtered, '-r');
+title('Filtered signal');
+xlabel('Time (s)');
+ylabel('Signal');
+legend('Filtered signal');
+hold off;
 
 % calculate and show match result
-[value, index] = max(Filtered);
+[value, index] = max(filtered);
 result = index - T;
-figure(3)
+figure;
 hold on
 plot(SonarPing,'-r');
 plot(SonarEcho,'-b');
