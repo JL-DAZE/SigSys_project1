@@ -32,7 +32,10 @@ function msg = decode(sig_received,fs,varargin)
             num = num + result(i*8 + j) * 2^(8-j);
         end
         index = Ascii{1,2} == num;
-        char = Ascii{1,1}{index};
+        char = "¿";
+        if sum(index) > 0
+            char = Ascii{1,1}{index};
+        end
         if char == ":"
             msg = strcat(msg," ");
         else
