@@ -37,7 +37,7 @@ xPing = timeStep:timeStep:timeStep*length(SonarPing);
 xEcho = timeStep:timeStep:timeStep*length(SonarEcho);
 plot(xPing, SonarPing,'-r');
 plot(xEcho, SonarEcho,'-b');
-title('The matched pattern on Ping signal');
+title('The matched pattern on Echo signal');
 xlabel('Time (s)');
 ylabel('Signal');
 plot([result*timeStep result*timeStep],[min(SonarEcho) max(SonarEcho)],'-p')
