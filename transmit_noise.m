@@ -6,24 +6,32 @@ function transmit_noise(msg, pulse, sampleRate, noiseLevel)
     timeStep = 1 / sampleRate;
     x = timeStep:timeStep:signalLength*timeStep;
     
+    figure;
     hold on;
-    figure(1);
     plot(x, encodedSignal, '-b');
     plot(x, noise, '-r');
     title('Original signal and noise');
-    xlabel('Signal');
-    ylabel('Time');
+    xlabel('Time');
+    ylabel('Signal');
     legend({'Original signal', 'Noise'});
     hold off;
     
+    figure;
     hold on;
-    figure(2);
     plot(x, noisifiedSignal, '-r');
     title('Noisified signal');
-    xlabel('Signal');
-    ylabel('Time');
+    xlabel('Time');
+    ylabel('Signal');
     legend({'Noisified signal'});
     hold off;
     
+    decodedMsg = decode(noisifiedSignal, sampleRate, pulse);
+    fprintf(1, "\nOriginal message is: %s\n", msg);
+    fprintf(1, "Decoded message is: %s\n", decodedMsg);
+    if msg == decodedMsg
+        fprintf(1, "Two messages match.\n\n");
+    else
+        fprintf(2, "Two messages does not match.\n\n");
+    end
     
 end

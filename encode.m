@@ -23,7 +23,7 @@ function signal = encode(msg, pulse)
             end
             
             if findFlag == 0
-                fprintf(2, "\nCharacter not supported, aborting\n\n");
+                fprintf(2, "\nEncode.m: Character not supported, aborting\n\n");
                 signal = zeros(signalLength, 1);
                 return;
             end
