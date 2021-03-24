@@ -1,4 +1,4 @@
-load('New_ReceivedSignal1.mat');
+load('New_ReceivedSignal3.mat');
 fs = 100;
 duration = 0.5;
 pulse = linspace(0,1,fs*duration+1);
