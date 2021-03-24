@@ -4,8 +4,8 @@ load('ActiveSonar.mat');
 
 figure;
 hold on;
-xPing = sampleRate:sampleRate:sampleRate*length(SonarPing);
-xEcho = sampleRate:sampleRate:sampleRate*length(SonarEcho);
+xPing = timeStep:timeStep:timeStep*length(SonarPing);
+xEcho = timeStep:timeStep:timeStep*length(SonarEcho);
 plot(xPing, SonarPing,'-r');
 plot(xEcho, SonarEcho,'-b');
 title('Ping signal and echo signal');
@@ -20,7 +20,7 @@ T = length(SonarPing);
 filtered = conv(SonarEcho, fliplr(SonarPing));
 figure;
 hold on;
-xFiltered = sampleRate:sampleRate:sampleRate*length(filtered);
+xFiltered = timeStep:timeStep:timeStep*length(filtered);
 plot(xFiltered, filtered, '-r');
 title('Filtered signal');
 xlabel('Time (s)');
@@ -32,11 +32,20 @@ hold off;
 [value, index] = max(filtered);
 result = index - T;
 figure;
-hold on
-plot(SonarPing,'-r');
-plot(SonarEcho,'-b');
-plot([result result],[min(SonarEcho) max(SonarEcho)],'-p')
-plot([result + T result + T],[min(SonarEcho) max(SonarEcho)],'-p')
+hold on;
+xPing = timeStep:timeStep:timeStep*length(SonarPing);
+xEcho = timeStep:timeStep:timeStep*length(SonarEcho);
+plot(xPing, SonarPing,'-r');
+plot(xEcho, SonarEcho,'-b');
+title('The matched pattern on Ping signal');
+xlabel('Time (s)');
+ylabel('Signal');
+plot([result*timeStep result*timeStep],[min(SonarEcho) max(SonarEcho)],'-p')
+plot([(result + T)*timeStep (result + T)*timeStep],[min(SonarEcho) max(SonarEcho)],'-p')
+legend('Ping signal', 'Echo signal');
+txt = '\leftarrow Matched pattern \rightarrow';
+text(result*timeStep,max(SonarEcho),txt);
+hold off;
 
 distance = result / 100 * 5000 / 2;
 fprintf("The distance is %d\n", distance);
