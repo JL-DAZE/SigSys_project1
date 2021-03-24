@@ -47,6 +47,8 @@ function msg = decode(sig_received,fs,varargin)
         char = "¿";
         if sum(index) > 0
             char = Ascii{1,1}{index};
+        else
+            fprintf(2, "\nDecode.m: Character Ascii %d not supported, use ¿ instead\n", num);
         end
         if char == ":"
             msg = strcat(msg," ");
